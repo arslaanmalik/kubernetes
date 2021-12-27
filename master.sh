@@ -4,15 +4,15 @@ echo "Updating Yum...."
 #sudo yum -y update && sudo systemctl reboot
 
 echo "Installing Kubelet, Kubeadm and Kubectl......"
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1
-gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
-https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kubelet kubeadm kubectl
 EOF
 
 sudo yum -y install epel-release vim git curl wget kubelet kubeadm kubectl --disableexcludes=kubernetes
@@ -44,8 +44,6 @@ sudo yum install docker-ce docker-ce-cli containerd.io
 sudo mkdir /etc/docker
 sudo mkdir -p /etc/systemd/system/docker.service.d
 
-
-
 sudo tee /etc/docker/daemon.json <<EOF
 {
 "exec-opts": ["native.cgroupdriver=systemd"],
@@ -75,7 +73,7 @@ lsmod | grep br_netfilter
 sudo systemctl enable kubelet
 sudo kubeadm config images pull
 
-sudo kubeadm init --control-plane-endpoint=192.168.100.99
+sudo kubeadm init --control-plane-endpoint=192.168.100.95
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
