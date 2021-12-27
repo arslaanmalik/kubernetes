@@ -75,9 +75,9 @@ br_netfilter 22256 0
 bridge 151336 2 br_netfilter,ebtable_broute
 sudo systemctl enable kubelet
 sudo kubeadm config images pull
-echo"Your Pod netwrok cidr will be 10.244.0.0/16"
+echo "Your Pod netwrok cidr will be 10.244.0.0/16"
 sudo kubeadm init --control-plane-endpoint=192.168.100.99
-echo"Extract the token to join your worker nodes with your master otherwise you                                                                                              can not connect each other"
+echo "Extract the token to join your worker nodes with your master otherwise you                                                                                              can not connect each other"
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
