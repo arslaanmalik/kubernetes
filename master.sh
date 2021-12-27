@@ -73,7 +73,7 @@ lsmod | grep br_netfilter
 sudo systemctl enable kubelet
 sudo kubeadm config images pull
 
-sudo kubeadm init --control-plane-endpoint=192.168.100.95
+sudo kubeadm init --pod-network-cidr=192.168.100.0/24 --control-plane-endpoint=192.168.100.95
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
