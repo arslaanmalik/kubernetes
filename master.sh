@@ -69,9 +69,7 @@ echo "Disabling Firewall if enabled"
 sudo systemctl disable --now firewalld
 
 echo "Now your master node is setting up :)"
-$ lsmod | grep br_netfilter
-br_netfilter 22256 0
-bridge 151336 2 br_netfilter,ebtable_broute
+lsmod | grep br_netfilter
 sudo systemctl enable kubelet
 sudo kubeadm config images pull
 echo "Your Pod netwrok cidr will be 10.244.0.0/16"
