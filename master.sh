@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Updating Yum...."
-sudo yum -y update && sudo systemctl reboot
+#sudo yum -y update && sudo systemctl reboot
 
 echo "Installing Kubelet, Kubeadm and Kubectl......"
 sudo tee /etc/yum.repos.d/kubernetes.repo<<EOF
@@ -74,7 +74,7 @@ bridge 151336 2 br_netfilter,ebtable_broute
 sudo systemctl enable kubelet
 sudo kubeadm config images pull
 echo"Your Pod netwrok cidr will be 10.244.0.0/16"
-sudo kubeadm init --control-plane-endpoint=YOUR_IP
+sudo kubeadm init --control-plane-endpoint=192.168.100.99
 echo"Extract the token to join your worker nodes with your master otherwise you                                                                                              can not connect each other"
 
 mkdir -p $HOME/.kube
