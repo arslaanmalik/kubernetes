@@ -10,8 +10,10 @@ name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-
 x86_64
 enabled=1
-gpgcheck=1repo_gpgcheck=1gpgkey=https://packages.cloud.google.com/yu
-m/doc/yum-key.gpghttps://packages.cloud.google.com/yum/doc/rpmpackage-key.gpg
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+https://packages.cloud.google.com/yum/doc/rpmpackage-key.gpg
 EOF
 
 sudo yum -y install epel-release vim git curl wget kubelet kubeadm kubectl --
