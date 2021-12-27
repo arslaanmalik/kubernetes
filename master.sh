@@ -4,7 +4,7 @@ echo "Updating Yum...."
 #sudo yum -y update && sudo systemctl reboot
 
 echo "Installing Kubelet, Kubeadm and Kubectl......"
-sudo tee /etc/yum.repos.d/kubernetes.repo<<EOF
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
