@@ -20,16 +20,17 @@ sudo yum -y install epel-release vim git curl wget kubelet kubeadm kubectl --dis
 echo "Your Kubeadm version is......"
 sudo kubeadm version
 
-echo "Disabling SE Linux and Swap for you :)"
+echo "Disabling SE Linux and Swap for You"
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
 
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo swapoff -a
 
-echo "Configuring sysctl...."
+echo "Configuring Systemctl ModProbe Overlay and Netfilter"
 sudo modprobe overlay
 sudo modprobe br_netfilter
+echo "Enabling IP forwarding so that our pods can communicate with each other"
 sudo tee /etc/sysctl.d/kubernetes.conf<<EOF
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
@@ -40,7 +41,7 @@ sudo sysctl --system
 echo "Installing Docker..."
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-sudo yum install docker-ce docker-ce-cli containerd.io
+sudo yum install -y docker-ce docker-ce-cli containerd.io
 sudo mkdir /etc/docker
 sudo mkdir -p /etc/systemd/system/docker.service.d
 
@@ -68,14 +69,25 @@ sudo docker --version
 echo "Disabling Firewall if enabled"
 sudo systemctl disable --now firewalld
 
-echo "Now your master node is setting up :)"
+echo "Checking Netfilter Availability"
 lsmod | grep br_netfilter
+
+echo "Enabling Kubelet"
 sudo systemctl enable kubelet
 sudo kubeadm config images pull
 
-sudo kubeadm init --pod-network-cidr=192.168.100.0/24 --control-plane-endpoint=192.168.100.95
+echo "Kubeadm Intialzing Advertising the Public IP on This Master Node"
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=192.168.100.95
 
+#Fix the Error – The connection to the server localhost:8080 was refused
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+echo "Change the user to other than root"
+
+#su arslaanmalik
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+echo "Applying Calico Network"
 kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
