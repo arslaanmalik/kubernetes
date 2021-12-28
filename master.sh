@@ -82,6 +82,9 @@ sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-addres
 #Fix the Error – The connection to the server localhost:8080 was refused
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
+echo "Checking Status of Nodes"
+sudo kubectl get nodes
+
 echo "Change the user to other than root"
 
 #su arslaanmalik
@@ -89,5 +92,7 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+echo "Checking Status of Nodes After Applying Calico Network"
+sudo kubectl get nodes
 echo "Applying Calico Network"
 kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
