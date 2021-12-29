@@ -20,12 +20,18 @@ sudo yum -y install epel-release vim git curl wget kubelet kubeadm kubectl --dis
 echo "Your Kubeadm version is......"
 sudo kubeadm version
 
+echo "Checking the current status of selinux"
+sudo sestatus
+
 echo "Disabling SE Linux and Swap for You"
 sudo setenforce 0
-sudo sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
+sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo swapoff -a
+
+echo "Restaring your system to accept selinux disabled"
+sudo init 6
 
 echo "Configuring Systemctl ModProbe Overlay and Netfilter"
 sudo modprobe overlay
