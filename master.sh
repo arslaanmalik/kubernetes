@@ -100,5 +100,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 echo "Checking Status of Nodes After Applying Calico Network"
 sudo kubectl get nodes
-echo "Applying Calico Network"
-kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+echo "Installing Calico Network"
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml 
+kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+#echo "Installing Calico Cli ETCD"
+#kubectl apply -f https://docs.projectcalico.org/manifests/calicoctl-etcd.yaml
