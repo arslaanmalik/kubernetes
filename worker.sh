@@ -71,7 +71,3 @@ sudo systemctl disable --now firewalld
 echo "Now your worker node is setting up :)"
 lsmod | grep br_netfilter
 sudo systemctl enable kubelet
-
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
