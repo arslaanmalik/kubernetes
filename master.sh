@@ -89,7 +89,7 @@ sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --upload-certs --control-pla
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
 echo "Checking Status of Nodes"
-sudo kubectl get nodes
+kubectl get nodes
 
 echo "Change the user to other than root"
 
