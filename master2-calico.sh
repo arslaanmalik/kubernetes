@@ -61,9 +61,15 @@ kubectl get nodes
 echo "Change the user to other than root"
 
 #su arslaanmalik
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+#mkdir -p $HOME/.kube
+#sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+#sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+sudo mkdir -p $HOME/.kube
+sudo cp /etc/kubernetes/admin.conf $HOME/
+sudo chown $(id -u):$(id -g) $HOME/admin.conf
+#export KUBECONFIG=$HOME/admin.conf
+export KUBECONFIG=/etc/kubernetes/admin.conf or $HOME/.kube/config
 
 echo "Checking Status of Nodes After Applying Calico Network"
 sudo kubectl get nodes
