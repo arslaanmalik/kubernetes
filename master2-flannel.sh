@@ -48,7 +48,7 @@ sudo systemctl enable kubelet
 sudo kubeadm config images pull
 
 echo "Kubeadm Intialzing Advertising the Public IP on This Master Node"
-sudo kubeadm init --pod-network-cidr=10.1.0.0/16 --upload-certs --control-plane-endpoint=$YOUR_IP
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs --control-plane-endpoint=$YOUR_IP
 
 #Fix the Error – The connection to the server localhost:8080 was refused
 export KUBECONFIG=/etc/kubernetes/admin.conf
