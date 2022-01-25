@@ -52,31 +52,27 @@ sudo kubeadm config images pull
 echo "Kubeadm Intialzing Advertising the Public IP on This Master Node"
 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --upload-certs --control-plane-endpoint=$YOUR_IP
 
+sudo mkdir -p $HOME/.kube
+sudo cp /etc/kubernetes/admin.conf $HOME/
+sudo chown $(id -u):$(id -g) $HOME/admin.conf
+export KUBECONFIG=$HOME/admin.conf
+
+echo "Bootstrapping Kubectl Commands"
+echo 'export KUBECONFIG=$HOME/admin.conf' >> $HOME/.bashrc
+
 #Fix the Error – The connection to the server localhost:8080 was refused
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
 echo "Checking Status of Nodes"
 kubectl get nodes
 
-echo "Change the user to other than root"
-
-#su arslaanmalik
-#mkdir -p $HOME/.kube
-#sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-#sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-sudo mkdir -p $HOME/.kube
-sudo cp /etc/kubernetes/admin.conf $HOME/
-sudo chown $(id -u):$(id -g) $HOME/admin.conf
-#export KUBECONFIG=$HOME/admin.conf
-export KUBECONFIG=/etc/kubernetes/admin.conf or $HOME/.kube/config
-
-echo "Checking Status of Nodes After Applying Calico Network"
-sudo kubectl get nodes
 echo "Installing Calico Network"
-#kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml 
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml 
+
 #kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 #echo "Installing Calico Cli ETCD"
 #kubectl apply -f https://docs.projectcalico.org/manifests/calicoctl-etcd.yaml
-#echo "Installing Flannel Cli"
-#kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+echo "Checking Status of Nodes After Applying Calico Network"
+sudo kubectl get nodes
+
