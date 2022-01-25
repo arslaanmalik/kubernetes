@@ -67,8 +67,11 @@ echo "Creating Folders and giveing permissions to run Kubectl Commands"
 sudo mkdir -p $HOME/.kube
 sudo cp /etc/kubernetes/admin.conf $HOME/
 sudo chown $(id -u):$(id -g) $HOME/admin.conf
-#export KUBECONFIG=$HOME/admin.conf
-export KUBECONFIG=/etc/kubernetes/admin.conf
+export KUBECONFIG=$HOME/admin.conf
+
+echo "Bootstrapping Kubectl Commands"
+echo 'export KUBECONFIG=$HOME/admin.conf' >> $HOME/.bashrc
+
 
 echo "Checking Status of Nodes After Applying CNI"
 sudo kubectl get nodes
@@ -79,3 +82,5 @@ sudo kubectl get nodes
 #kubectl apply -f https://docs.projectcalico.org/manifests/calicoctl-etcd.yaml
 echo "Installing Flannel Cli"
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+echo "Checking if Flannel and Core DNS is Installed"
+kubectl get pods -n kube-system
