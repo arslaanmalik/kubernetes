@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ace-deployment
+  labels:
+    app: ace
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: ace
+  template:
+    metadata:
+      labels:
+        app: ace
+    spec:
+      containers:
+      - name: ace
+        image: {{ .Values.image.name }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7600
+      imagePullSecrets:
+          - name: regcred
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ace-service
+spec:
+  selector:
+    app: ace
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3002
+      targetPort: 7600
+      nodePort: 30001
+#  externalIPs:
+#  #    - 192.168.100.95
+  type: NodePort
+#
