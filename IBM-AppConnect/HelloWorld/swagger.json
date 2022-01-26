@@ -1,0 +1,46 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "HelloWorld",
+    "version" : "1.0.0",
+    "description" : "HelloWorld"
+  },
+  "paths" : {
+    "/helloworld" : {
+      "post" : {
+        "operationId" : "postHelloworld",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a helloworld",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/RequestPayload"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        } ]
+      }
+    }
+  },
+  "basePath" : "/helloworld/v1",
+  "definitions" : {
+    "RequestPayload" : {
+      "type" : "object",
+      "properties" : {
+        "RefId" : {
+          "type" : "string"
+        },
+        "RefData" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  name: AppConnect
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          cd "C:\Program Files\IBM\ACE\11.0.0.8\server\bin"
+          mqsiprofile.cmd && mqsilist
+    # - task: PowerShell@2
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       cd 'C:\Program Files\IBM\ACE\11.0.0.8\server\bin'
+    #       .\mqsiprofile.cmd 
+    #       mqsilist
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'dockerhub-connection'
+    #     repository: 'mfarhan1998/ace-test'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Dockerfile'
+        
+    # - task: CmdLine@2
+    #   inputs:
+    #       script: 'docker images'
+          
