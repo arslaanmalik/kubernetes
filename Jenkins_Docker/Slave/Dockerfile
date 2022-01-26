@@ -15,7 +15,6 @@ RUN mkdir -p /tmp/download && \
  usermod -aG docker jenkins
 RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose
-#VOLUME /root/.docker
 
 #Installing Kubernetes CLI
 RUN cd /usr/bin && curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.2/bin/linux/amd64/kubectl

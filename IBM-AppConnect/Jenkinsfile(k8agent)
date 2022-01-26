@@ -1,0 +1,28 @@
+pipeline {
+    agent {
+	label 'kubeagent'
+    }
+    stages {
+        stage('Git clone'){
+            steps{
+                git branch: 'main', url: 'https://github.com/mfarhanSystemsltd/ACE-HelloWorld.git'
+            }
+        }
+        stage('Push to AWS ECR'){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'aws-ecr', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                    sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 736505676141.dkr.ecr.us-east-2.amazonaws.com'
+                    sh 'docker build -t 736505676141.dkr.ecr.us-east-2.amazonaws.com/ace-test:${BUILD_NUMBER} .'
+                    sh 'docker push 736505676141.dkr.ecr.us-east-2.amazonaws.com/ace-test:${BUILD_NUMBER}'
+                }
+            }
+        }
+        // stage('Deploy to K8s') {
+        //     steps {
+        // 		kubeconfig(credentialsId: 'mykubeconfig', serverUrl: '', caCertificate: '') {
+        // 		    sh 'kubectl apply -f deployment.yaml'
+        // 		}
+        //     }
+        // }
+    }
+}
