@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: qm2
+  name: qm2
+  namespace: mq
+spec:
+  host: qm2-mq.apps.myocp.os.fyre.ibm.com
+  port:
+    targetPort: 1414
+  to:
+    kind: Service
+    name: qm2
+    weight: 100
+  wildcardPolicy: None

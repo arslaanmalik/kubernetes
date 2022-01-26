@@ -1,0 +1,4 @@
+alter qmgr chlauth(DISABLED)
+alter qmgr connauth('')
+def channel(DEF.SVRCONN) chltype(SVRCONN) trptype(TCP) sslciph('ANY_TLS12') sslcauth(OPTIONAL) certlabl('default') mcauser('mqm')
+refresh security(*)

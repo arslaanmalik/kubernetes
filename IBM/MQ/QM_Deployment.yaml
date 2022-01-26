@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: qm2
+  name: qm2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qm2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: qm2
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/mq/mymqimage:1.7
+        name: mq
+        ports:
+        - containerPort: 1414
+          protocol: TCP
+        - containerPort: 9157
+          protocol: TCP
+        - containerPort: 9443
+          protocol: TCP
+        env:
+        - name: MQ_ADMIN_PASSWORD
+          value: passw0rd
+        - name: LICENSE
+          value: accept
+        - name: MQ_QMGR_NAME
+          value: QM2
+        resources: {}
