@@ -26,6 +26,16 @@ fsGroup: 992
 ---------------------------------------------------------------------------------------------------------------------------------------------
 **MS-TEAM WIKI**
 
+
+Teams
+
+Profile picture of My Team.
+K8s-Openshift
+
+Meet 
+
+K8s Links
+Last edited: Just now
 Youtube Links
 https://www.youtube.com/watch?v=jPrVuJ8cz8U&list=PLKse5vnrrZ2mknVuTt9_SOaRg6l-vGURy
  
@@ -53,8 +63,6 @@ If you do not have the token, you can get it by running the following command on
 
 kubeadm token list
 Jenkins CICD with K8
-
- 
 https://chathura-siriwardhana.medium.com/configure-jenkins-with-kubernetes-e3175e02ca8
 #K8 Deployment YAML for Jenkins
 https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-kubernetes
@@ -151,6 +159,7 @@ Protocol	Direction	Port Range	Purpose	Used By
 TCP	Inbound	10250	Kubelet API	Self, Control plane
 TCP	Inbound	30000-32767	NodePort Services†	All
  
+ 
 AWS CLI in Jenkins + Kubernetes Secret Creation
 Commands
 Restart CoreDNS
@@ -158,5 +167,4 @@ kubectl -n kube-system rollout restart deployment coredns
  
 Check Core DNS Logs
 kubectl logs --namespace=kube-system coredns-XXX
-
 
