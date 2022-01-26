@@ -17,6 +17,19 @@ pipeline {
                 }
             }
         }
+        stage('Pull Helm chart'){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'aws-ecr', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                    sh 'helm registry login --username AWS --password $(aws ecr get-login-password --region us-east-2) 736505676141.dkr.ecr.us-east-2.amazonaws.com'
+                    sh 'export HELM_EXPERIMENTAL_OCI=1'
+                    sh 'helm pull oci://736505676141.dkr.ecr.us-east-2.amazonaws.com/ace-deployment --version 0.1.0'
+                    sh 'tar -zxvf *.tgz'
+                }
+                kubeconfig(credentialsId: 'mykubeconfig', serverUrl: '', caCertificate: '') {
+                    sh 'helm install ace-chart ace-deployment/ --set replicaCount=3 --set image.name=736505676141.dkr.ecr.us-east-2.amazonaws.com/ace-test:${BUILD_NUMBER}'
+                }
+            }
+        }
         // stage('Deploy to K8s') {
         //     steps {
         // 		kubeconfig(credentialsId: 'mykubeconfig', serverUrl: '', caCertificate: '') {
