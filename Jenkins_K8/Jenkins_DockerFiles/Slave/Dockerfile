@@ -3,7 +3,7 @@ FROM jenkins/jnlp-slave
 USER root
 RUN apt update -y
 #Installing Tools
-RUN apt install -y apt-transport-https  ca-certificates  curl  gnupg2  software-properties-common git vim unzip wget dnsutils git
+RUN apt install -y apt-transport-https  ca-certificates  curl software-properties-common git vim unzip wget dnsutils git apt-utils
 
 #Installing Podman
 
