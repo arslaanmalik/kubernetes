@@ -5,6 +5,15 @@ RUN apt update -y
 #Installing Tools
 RUN apt install -y apt-transport-https  ca-certificates  curl  gnupg2  software-properties-common git vim unzip wget dnsutils git
 
+#Installing Podman
+
+# RUN . /etc/os-release \
+# echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list \
+# curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | apt-key add -
+# RUN apt update -y \
+# apt upgrade -y  \
+# apt install -y podman
+
 #Installing Docker and Docker Compose
 RUN mkdir -p /tmp/download && \
  curl -L https://download.docker.com/linux/static/stable/x86_64/docker-20.10.9.tgz | tar -xz -C /tmp/download && \
@@ -30,7 +39,7 @@ RUN cp -a /usr/bin/helm /usr/local/bin/helm
 #Installing AWS Cli
 RUN wget -O /root/awscliv2.zip "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" 
 RUN cd /root && unzip awscliv2.zip
-RUN cd /root ./root/aws/install -i /usr/local/aws-cli -b /usr/local/bin
+RUN cd /root ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
 RUN chmod +x /usr/local/aws-cli
 
 USER jenkins
