@@ -10,3 +10,4 @@ kubectl apply -f /Jenkins_K8_Yaml/pv.yml
 
 echo "Setup Kubernetes Jenkins"
 kubectl apply -f $workspace/jenkins-deployment.yml -n jenkins
+
