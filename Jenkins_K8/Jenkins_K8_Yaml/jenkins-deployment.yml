@@ -65,6 +65,8 @@ spec:
         env:
         - name: JAVA_OPTS
           value: -Djenkins.install.runSetupWizard=false
+#        - name: JENKINS_OPTS
+#          value: --prefix=/jenkins
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
