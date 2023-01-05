@@ -49,7 +49,7 @@ sudo systemctl enable kubelet
 sudo kubeadm config images pull
 
 echo "Kubeadm Intialzing Advertising the Public IP on This Master Node"
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs --control-plane-endpoint=$YOUR_IP
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs
 
 echo "Creating Folders and giveing permissions to run Kubectl Commands"
 sudo mkdir -p $HOME/.kube
