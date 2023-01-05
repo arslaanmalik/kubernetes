@@ -168,3 +168,6 @@ kubectl -n kube-system rollout restart deployment coredns
 Check Core DNS Logs
 kubectl logs --namespace=kube-system coredns-XXX
 
+Issue if Worker does not start, after installing the worker script but not running any join command
+Make sure you use the join command first on worker node only then the kubelet will start. 
+
