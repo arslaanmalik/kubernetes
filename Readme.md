@@ -23,16 +23,14 @@ spec:
 securityContext:
 fsGroup: 992
 
+**Refernece Article for K8 Kubeadm Setup**
+https://computingforgeeks.com/install-kubernetes-cluster-on-centos-with-kubeadm/
+
+Issue if Worker does not start, after installing the worker script but not running any join command
+Make sure you use the join command first on worker node only then the kubelet will start. 
+
 ---------------------------------------------------------------------------------------------------------------------------------------------
 **MS-TEAM WIKI**
-
-
-Teams
-
-Profile picture of My Team.
-K8s-Openshift
-
-Meet 
 
 K8s Links
 Last edited: Just now
@@ -41,14 +39,18 @@ https://www.youtube.com/watch?v=jPrVuJ8cz8U&list=PLKse5vnrrZ2mknVuTt9_SOaRg6l-vG
  
 Calico
 https://projectcalico.docs.tigera.io/networking/migrate-pools
+
 #Installation of Calico
 https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart
+
 Flannel
 #Installation of Flannel
 Setup Kubernetes 1.14 Cluster on CentOS 7.6 (tekspace.io)
+
 Kubeadm
 Reset Kubeadm
 https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-reset/
+
 Installation
 #Run pods on master node
 https://computingforgeeks.com/how-to-schedule-pods-on-kubernetes-control-plane-node/
@@ -168,6 +170,5 @@ kubectl -n kube-system rollout restart deployment coredns
 Check Core DNS Logs
 kubectl logs --namespace=kube-system coredns-XXX
 
-Issue if Worker does not start, after installing the worker script but not running any join command
-Make sure you use the join command first on worker node only then the kubelet will start. 
+
 
