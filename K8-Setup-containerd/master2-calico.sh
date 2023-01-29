@@ -73,3 +73,6 @@ kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 echo "Checking Status of Nodes After Applying Calico Network"
 sudo kubectl get nodes
 
+echo"Setting Alias k for kubectl"
+alias k=kubectl
+

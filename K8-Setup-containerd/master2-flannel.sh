@@ -53,10 +53,8 @@ echo "Creating Folders and giveing permissions to run Kubectl Commands"
 sudo mkdir -p $HOME/.kube
 sudo cp /etc/kubernetes/admin.conf $HOME/
 sudo chown $(id -u):$(id -g) $HOME/admin.conf
-export KUBECONFIG=$HOME/admin.conf
-
 #Fix the Error – The connection to the server localhost:8080 was refused
-#export KUBECONFIG=/etc/kubernetes/admin.conf
+export KUBECONFIG=$HOME/admin.conf
 
 echo "Bootstrapping Kubectl Commands"
 echo 'export KUBECONFIG=$HOME/admin.conf' >> $HOME/.bashrc
@@ -71,3 +69,7 @@ kubectl get pods -n kube-system
 
 echo "Checking Status of Nodes After CNI "
 sudo kubectl get nodes
+
+echo"Setting Alias k for kubectl"
+alias k=kubectl
+

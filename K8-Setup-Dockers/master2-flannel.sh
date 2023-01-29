@@ -73,3 +73,6 @@ kubectl get pods -n kube-system
 
 echo "Checking Status of Nodes After CNI "
 sudo kubectl get nodes
+
+echo"Setting Alias k for kubectl"
+alias k=kubectl
