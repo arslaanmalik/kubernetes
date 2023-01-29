@@ -8,4 +8,4 @@ spec:
   accessModes:
   - ReadWriteMany
   hostPath:
-    path: /home/systemsltd/registry-pv
+    path: /home/arslaanmalik/registry-pv

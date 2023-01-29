@@ -64,6 +64,9 @@ https://github.com/dubareddy/kubernetes_latest_manifest/blob/main/Kubernetes/01-
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
 
+#Setup Docker Internal Registry
+https://medium.com/swlh/deploy-your-private-docker-registry-as-a-pod-in-kubernetes-f6a489bf0180
+
 If you do not have the token, you can get it by running the following command on the control-plane node:
 kubeadm token list
 Jenkins CICD with K8
