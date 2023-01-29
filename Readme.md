@@ -58,11 +58,13 @@ https://computingforgeeks.com/how-to-schedule-pods-on-kubernetes-control-plane-n
 https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm/
 #Installation with Centos 7
 https://computingforgeeks.com/install-kubernetes-cluster-on-centos-with-kubeadm/
+
+https://github.com/dubareddy/kubernetes_latest_manifest/blob/main/Kubernetes/01-kubernetes-architecture-Installation/03-k8s-setup-kubeadm-containerd.md
 #Offical guide Installation 
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
-If you do not have the token, you can get it by running the following command on the control-plane node:
 
+If you do not have the token, you can get it by running the following command on the control-plane node:
 kubeadm token list
 Jenkins CICD with K8
 https://chathura-siriwardhana.medium.com/configure-jenkins-with-kubernetes-e3175e02ca8
@@ -81,8 +83,10 @@ https://computingforgeeks.com/how-to-install-kubernetes-dashboard-with-nodeport/
 https://computingforgeeks.com/create-admin-user-to-access-kubernetes-dashboard/
 #Service account linked with one namespace
 https://computingforgeeks.com/restrict-kubernetes-service-account-users-to-a-namespace-with-rbac/
+
 #If Kubeadm init goes wrong run this on Master and Workers:
  kubeadm reset && rm -rf /etc/cni/net.d
+ 
 Misc Links
 https://www.aquasec.com/cloud-native-academy/kubernetes-in-production/kubernetes-security-best-practices-10-steps-to-securing-k8s/
 #CIDR to IPv4 Conversion

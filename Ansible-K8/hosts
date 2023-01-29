@@ -1,0 +1,2 @@
+[Hyper-V]
+malik ansible_host=192.168.0.220 ansible_connection=ssh ansible_connection=ssh ansible_user=root
