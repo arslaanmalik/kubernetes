@@ -10,28 +10,17 @@ net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 EOF
 sudo sysctl --system
-
-apt-get update && apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-
-## Add Docker’s official GPG key
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-
-## Add Docker apt repository.
-add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) \
-    stable"
-
-## Install containerd
-apt-get update && apt-get install -y containerd.io
-
-# Configure containerd
-mkdir -p /etc/containerd
-containerd config default > /etc/containerd/config.toml
-sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
-
-# Restart containerd
-systemctl restart containerd
+echo "Installing Containerd..."
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum update -y && yum install -y containerd.io
+# Configure containerd and start service
+sudo mkdir -p /etc/containerd
+sudo containerd config default > /etc/containerd/config.toml
+##sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+# restart containerd
+sudo systemctl restart containerd
+sudo systemctl enable containerd
 
 # To execute crictl CLI commands, ensure we create a configuration file as mentioned below
 cat /etc/crictl.yaml
