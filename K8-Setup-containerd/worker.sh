@@ -45,21 +45,20 @@ sudo yum update -y && yum install -y containerd.io
 # Configure containerd and start service
 sudo mkdir -p /etc/containerd
 sudo containerd config default > /etc/containerd/config.toml
-##sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+echo "Seting the cgroup driver for runc to systemd which is required for the kubelet."
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
 # restart containerd
 sudo systemctl restart containerd
 sudo systemctl enable containerd
 sudo systemctl status containerd
 
-
+echo "Seting crictl CLI"
 # To execute crictl CLI commands, ensure we create a configuration file as mentioned below
-cat /etc/crictl.yaml
-runtime-endpoint: unix:///run/containerd/containerd.sock
-image-endpoint: unix:///run/containerd/containerd.sock
-timeout: 2
+echo -e "runtime-endpoint: unix:///run/containerd/containerd.sock\nimage-endpoint: unix:///run/containerd/containerd.sock\ntimeout: 2" > /etc/crictl.yaml
+echo "Now you can use crictl commands like crictl images"
 
-echo "Your Docker Version is :"
-sudo docker --version
+echo "Your Containerd Version is :"
+sudo ctr --version
 
 echo "Disabling Firewall if enabled"
 sudo systemctl disable --now firewalld
