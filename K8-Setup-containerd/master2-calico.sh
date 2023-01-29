@@ -77,6 +77,6 @@ echo"Setting Alias k for kubectl"
 alias k=kubectl
 
 #Note: By default control node will not be able to launch the pod, so to enable execute below command:
-#kubectl taint nodes --all node-role.kubernetes.io/master-
+#kubectl taint nodes k8-master node-role.kubernetes.io/master-
 #Revert the taint to make master disable scheduling pods on master
-#kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule
+#kubectl taint nodes k8-master node-role.kubernetes.io/master:NoSchedule
