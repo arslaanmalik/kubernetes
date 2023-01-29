@@ -24,6 +24,8 @@ sudo containerd config default > /etc/containerd/config.toml
 # restart containerd
 sudo systemctl restart containerd
 sudo systemctl enable containerd
+sudo systemctl status containerd
+
 
 # To execute crictl CLI commands, ensure we create a configuration file as mentioned below
 cat /etc/crictl.yaml
