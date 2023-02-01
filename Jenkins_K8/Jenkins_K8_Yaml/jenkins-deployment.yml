@@ -69,7 +69,7 @@ spec:
           value: -Djenkins.install.runSetupWizard=false
 #        - name: JENKINS_OPTS
 #          value: --prefix=/jenkins
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         - containerPort: 50000
