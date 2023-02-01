@@ -55,9 +55,11 @@ spec:
       - name: jenkins-pv-storage
         persistentVolumeClaim:
           claimName: jenkins-pv-claim
+      imagePullSecrets:
+      - name: reg-cred-secret
       containers:
       - name: jenkins
-        image: mfarhan1998/jenkins-master:centos
+        image: docker-registry:5000/jenkins:master 
         resources:
           limits:
             memory: "2048Mi"
