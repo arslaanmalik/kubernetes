@@ -64,6 +64,6 @@ sudo ctr --version
 echo "Disabling Firewall if enabled"
 sudo systemctl disable --now firewalld
 
-echo "Now your worker node is setting up :)"
+echo "Now your worker node is setting up :) Dont worry if your status of Kubelet is not started once you add the master join command of kubeadm it will get started"
 lsmod | grep br_netfilter
 sudo systemctl enable kubelet
