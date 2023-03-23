@@ -56,7 +56,6 @@ echo "Creating Folders and giveing permissions to run Kubectl Commands"
 sudo mkdir -p $HOME/.kube
 sudo cp /etc/kubernetes/admin.conf $HOME/
 sudo chown $(id -u):$(id -g) $HOME/admin.conf
-#Fix the Error – The connection to the server localhost:8080 was refused
 export KUBECONFIG=$HOME/admin.conf
 
 
@@ -76,9 +75,16 @@ echo "Checking Status of Nodes After CNI "
 sudo kubectl get nodes
 
 echo"Setting Alias k for kubectl"
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
 alias k=kubectl
+complete -o default -F __start_kubectl k
 
+echo"Installing Metrics Server"
+#Fix the Error – The connection to the server localhost:8080 was refused
 export KUBECONFIG=$HOME/admin.conf
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
 
 
 #Note: By default control node will not be able to launch the pod, so to enable execute below command:
