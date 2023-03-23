@@ -18,7 +18,7 @@ EOF
 #gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 
 #sudo yum -y install epel-release vim git curl wget kubelet kubeadm kubectl --disableexcludes=kubernetes
-sudo yum -y install epel-release vim git curl wget kubelet-1.26.2 kubeadm-1.26.2-0 kubectl-1.26.2 --disableexcludes=kubernetes
+sudo yum -y install epel-release vim git curl wget kubelet-1.26.3 kubeadm-1.26.3-0 kubectl-1.26.3 --disableexcludes=kubernetes
 
 echo "Your Kubeadm version is......"
 sudo kubeadm version
