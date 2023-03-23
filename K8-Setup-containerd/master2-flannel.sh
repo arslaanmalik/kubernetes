@@ -49,12 +49,16 @@ sudo kubeadm config images pull
 echo "Kubeadm Intialzing Advertising the Public IP on This Master Node"
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs
 
+echo "Waiting for things to get ready"
+sleep 30
+
 echo "Creating Folders and giveing permissions to run Kubectl Commands"
 sudo mkdir -p $HOME/.kube
 sudo cp /etc/kubernetes/admin.conf $HOME/
 sudo chown $(id -u):$(id -g) $HOME/admin.conf
 #Fix the Error – The connection to the server localhost:8080 was refused
 export KUBECONFIG=$HOME/admin.conf
+
 
 echo "Bootstrapping Kubectl Commands"
 echo 'export KUBECONFIG=$HOME/admin.conf' >> $HOME/.bashrc
@@ -64,6 +68,7 @@ kubectl get nodes
 
 echo "Installing Flannel Cli"
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
 echo "Checking if Flannel and Core DNS is Installed"
 kubectl get pods -n kube-system
 
@@ -72,6 +77,8 @@ sudo kubectl get nodes
 
 echo"Setting Alias k for kubectl"
 alias k=kubectl
+
+export KUBECONFIG=$HOME/admin.conf
 
 
 #Note: By default control node will not be able to launch the pod, so to enable execute below command:
