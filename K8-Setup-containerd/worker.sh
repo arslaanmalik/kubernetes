@@ -27,9 +27,15 @@ sudo sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo swapoff -a
 
-echo "Configuring sysctl...."
+# Configure persistent loading of modules
+sudo tee /etc/modules-load.d/containerd.conf <<EOF
+overlay
+br_netfilter
+EOF
+echo "Configuring Systemctl ModProbe Overlay and Netfilter"
 sudo modprobe overlay
 sudo modprobe br_netfilter
+echo "Enabling IP forwarding so that our pods can communicate with each other"
 sudo tee /etc/sysctl.d/kubernetes.conf<<EOF
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
