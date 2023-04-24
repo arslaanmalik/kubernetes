@@ -6,7 +6,7 @@ echo "Creating Namespace Jenkins "
 kubectl create namespace jenkins
 
 echo "Create Persistant Volume"
-kubectl apply -f /Jenkins_K8_Yaml/pv.yml
+kubectl apply -f /Jenkins_K8_Yaml/pv.yaml
 
 echo "Creating Master and Slave Images"
 docker build -t kubernetes/Jenkins_K8/Jenkins_DockerFiles/Master docker-registry:5000/jenkins:master .

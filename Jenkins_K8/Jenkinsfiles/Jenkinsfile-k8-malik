@@ -1,0 +1,15 @@
+pipeline {
+    agent {
+    	kubernetes {
+    		inheritFrom 'k8agent'
+    	}
+    }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'kubectl version'
+      }
+    }
+  }
+}
+

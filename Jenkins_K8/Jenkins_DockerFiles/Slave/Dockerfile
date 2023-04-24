@@ -1,4 +1,4 @@
-FROM jenkins/jnlp-slave
+FROM jenkins/jnlp-slave:latest-jdk11
 
 USER root
 RUN apt update -y
