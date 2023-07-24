@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Installing K8 Dashboard"
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 echo "Get Services"
 kubectl get svc -n kubernetes-dashboard
 echo "Patch Service to Change Cluster IP to Node"
