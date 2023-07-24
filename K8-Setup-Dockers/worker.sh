@@ -38,30 +38,27 @@ net.ipv4.ip_forward = 1
 EOF
 sudo sysctl --system
 
-echo "Installing Docker..."
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-sudo yum install -y docker-ce docker-ce-cli containerd.io
-sudo mkdir /etc/docker
-sudo mkdir -p /etc/systemd/system/docker.service.d
+# echo "Installing Docker..."
+# sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+# sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# sudo yum install -y docker-ce docker-ce-cli containerd.io
+# sudo mkdir /etc/docker
+# sudo mkdir -p /etc/systemd/system/docker.service.d
 
-sudo tee /etc/docker/daemon.json <<EOF
-{
-"exec-opts": ["native.cgroupdriver=systemd"],
-"log-driver": "json-file",
-"log-opts": {
-"max-size": "100m"
-},
-"storage-driver": "overlay2",
-"storage-opts": [
-"overlay2.override_kernel_check=true"
-]
-}
-EOF
+# sudo tee /etc/docker/daemon.json <<EOF
+# {
+# "exec-opts": ["native.cgroupdriver=systemd"],
+# "log-driver": "json-file",
+# "log-opts": {
+# "max-size": "100m"
+# }
+# }
+# EOF
 
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-sudo systemctl enable docker
+# echo "Daemon Reload, Enable and Restart Docker"
+# sudo systemctl daemon-reload
+# sudo systemctl restart docker
+# sudo systemctl enable docker
 
 echo "Your Docker Version is :"
 sudo docker --version
