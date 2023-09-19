@@ -16,13 +16,13 @@ spec:
   ports:
   - appProtocol: http
     name: http
-    nodePort: 30008
+    nodePort: 30000
     port: 80
     protocol: TCP
     targetPort: http
   - appProtocol: https
     name: https
-    nodePort: 30009
+    nodePort: 30001
     port: 443
     protocol: TCP
     targetPort: https
