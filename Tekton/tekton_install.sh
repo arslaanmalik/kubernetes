@@ -27,4 +27,10 @@ echo "Installing tekton tasks"
 kubectl apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.9/git-clone.yaml
 kubectl apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/buildah/0.6/buildah.yaml
 
+
+echo "If required Patching Tekton Dashboard to NodePort *Reconfigure Random Port Assigned*"
+# kubectl patch svc tekton-dashboard -n tekton-pipeline s --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"}]'
+# kubectl get svc --namespace tekton-pipelines
+
+
 echo "You might need storage class for Tekton. For more details read README"
