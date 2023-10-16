@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: java-deploy-run
+spec:
+  pipelineRef:
+    name: java-deploy
+  params:
+    - name: repo-url
+      value: https://github.com/UsmanAsim/tekton-java-app.git
+    - name: deployment-name
+      value: java-deployment
+    - name: image
+      value: usmanasim11/java-app
+    - name: docker-username
+      value: usmanasim11
+    - name: docker-password
+      value: Frequent@54321
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: java-pvc
+    - name: maven-settings
+      persistentVolumeClaim:
+        claimName: maven-settings-pvc
+

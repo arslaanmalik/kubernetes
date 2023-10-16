@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: react-deploy-run
+spec:
+  pipelineRef:
+    name: react-deploy
+  params:
+    - name: repo-url
+      value: https://github.com/UsmanAsim/tekton-react-app.git
+    - name: deployment-name
+      value: react-deployment
+    - name: image
+      value: usmanasim11/react-app
+    - name: docker-username
+      value: usmanasim11
+    - name: docker-password
+      value: Frequent@54321
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: react-pvc
+

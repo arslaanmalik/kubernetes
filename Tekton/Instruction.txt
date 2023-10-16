@@ -1,0 +1,46 @@
+Instruction
+
+#task
+
+1. hello.yaml
+
+kubectl apply –f ./hello.yaml
+tkn task ls
+tkn task start hello
+
+2. hello-param-default.yaml
+
+kubectl apply -f ./hello-param-defaults.yaml
+tkn task start hello-param --showlog   (ask for input of name ust type usman)
+tkn task start hello-param --showlog --use-param-defaults
+
+3. first-task.yaml
+
+kubectl apply -f <filename>
+
+4. clonetask.yaml (just clone the git public repo)
+5. clone-ls.yaml (clone the public repo and list the content of the repo sharing a dir "source")
+
+tkn task start clone-and-list -w name=source,emptyDir="" --showlog
+
+6. clean up  (it will clean the workspace only)
+
+kubectl apply –f ./cleanup.yaml
+tkn task start cleanup --showlog -w name=source,claimName=tekton-pvc1
+
+
+
+
+
+#pipelines
+
+1. pipeline-first-task.yaml  [task Ref: first-task.yaml]
+
+kubectl apply -f <filename>
+tkn pipeline start hello
+tkn pipeline start hello --showlog
+
+2.clone-and-ls-and-clean.yaml  [task Ref: cleanup, split-task ]
+
+kubectl apply -f ./clone-and-ls-and-clean.yaml
+tkn pipeline start clone-and-list --showlog -w name=codebase,claimName=tekton-pvc1

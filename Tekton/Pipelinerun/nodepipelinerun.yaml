@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: node-deploy-run
+spec:
+  pipelineRef:
+    name: node-deploy
+  params:
+    - name: repo-url
+      value: https://github.com/UsmanAsim/tekton-node-app.git
+    - name: deployment-name
+      value: node-deployment
+    - name: image
+      value: usmanasim11/node-app
+    - name: docker-username
+      value: usmanasim11
+    - name: docker-password
+      value: Frequent@54321
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: node-pvc
+
