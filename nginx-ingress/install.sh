@@ -8,7 +8,7 @@ echo "What Port do you want to set the K8 ingress port to?"
 echo "Installing K8 Ingress"
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/baremetal/deploy.yaml
 
-echo "Get Services"
+echo "Get Services Before Patching with NodePort"
 kubectl get svc -n ingress-nginx
 echo "Create Patching Yaml for Nodeport Dashboard"
 cat << EOF > ingress_svc-nodeport_patch.yaml
@@ -30,3 +30,6 @@ EOF
 
 echo "Apply Patch"
 kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch "$(cat ingress_svc-nodeport_patch.yaml)"
+
+echo "Get Services After Patching with NodePort"
+kubectl get svc -n ingress-nginx
