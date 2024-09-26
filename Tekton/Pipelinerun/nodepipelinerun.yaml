@@ -15,7 +15,7 @@ spec:
     - name: docker-username
       value: usmanasim11
     - name: docker-password
-      value: Frequent@54321
+      value: #
   workspaces:
     - name: source
       persistentVolumeClaim:
